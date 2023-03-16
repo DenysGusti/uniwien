@@ -21,6 +21,6 @@ void fill_combinations(array<array<uint64_t, 7>,  46> &c) {
 int main() {
     array<array<uint64_t, 7>,  46> c{};
     fill_combinations(c);
-    cout << "the probability of a jackpot = " << 
+    cout << "the probability of a jackpot = " << 1.L / c[6][45] << '\n';
     return 0;
 }
