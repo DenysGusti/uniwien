@@ -10,7 +10,7 @@ and calculate the value of the polynomial at the position x.
 Use a maximum of 3 variables with fundamental data type for this.
 Also, perform a maximum of 4 multiplications in the calculation.
 */
-const static size_t degree = 4;
+const static int degree = 4;
 
 int main() {
     ld x{}, c{}, result{};
