@@ -7,7 +7,7 @@ using ld = long double;
 /*
 (*) Read in five measured values of a test series and determine the mean value. Use a maximum of 2 variables with fundamental data type for this.
 */
-const static size_t n = 5;
+const static int n = 5;
 
 int main() {
     ld mean{}, test{};
