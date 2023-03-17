@@ -1,5 +1,4 @@
 #include <iostream>
-#include <array>
 
 using namespace std;
 
@@ -14,18 +13,16 @@ Also, perform a maximum of 4 multiplications in the calculation.
 const static size_t degree = 4;
 
 int main() {
-    ld x{}, c0{}, c1{};
+    ld x{}, c{}, result{};
     cout << "x = ";
     cin >> x;
 
-    for (int i = 0; i < degree; ++i) {
+    for (int i = 0; i <= degree; ++i) {
         cout << '\n' << static_cast<char>('a' + i) << " = ";
-        cin >> c0;
-        
+        cin >> c;
+        result = !i ? c : result * x + c;
     }
 
-            
-
-    cout << "\nvalue of the polynomial at the point x (" << x << ") = " << ans << '\n';
+    cout << "\nvalue of the polynomial at the point x (" << x << ") = " << result << '\n';
     return 0;
 }
