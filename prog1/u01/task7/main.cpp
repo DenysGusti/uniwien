@@ -19,7 +19,6 @@ int main() {
     do {
         cout << endl << "choose convert to euros or dollars (e/d): ";
         cin >> o;
-        cout << o;
     } while (o != 'e' && o != 'd');
 
     if (o == 'e')
@@ -28,3 +27,12 @@ int main() {
         cout << '\n' << money << " EUR = " << money * EUR_to_USD << " USD\n";
     return 0;
 }
+
+/*
+Input:
+money = 100
+
+Output:
+choose convert to euros or dollars (e/d): e
+100 USD = 94.8092 EUR
+*/

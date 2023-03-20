@@ -20,3 +20,13 @@ int main() {
     cout << "\ntotal price = " << price * quantity * (1 + rate / 100) << '\n';
     return 0;
 }
+
+/*
+Input:
+item price = 5
+quantity = 20
+VAT rate in % = 15
+
+Output:
+total price = 115
+*/

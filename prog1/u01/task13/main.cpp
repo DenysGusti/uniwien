@@ -15,17 +15,22 @@ const static size_t n = 3;
 
 int main() {
     array<uint64_t, n> values{};
-    for (size_t i = 0; i < values.size(); ++i) {
-        cout << "\na[" << i << "] = ";
+    cout << "input values: ";
+    for (size_t i = 0; i < values.size(); ++i)
         cin >> values[i];
-    }
-    for (const auto el: values)
-        cout << el << '\n';
 
-    for (size_t i = values.size(); i > 0; --i)
-        cout << values[i - 1] % 10;
+    for (size_t i = values.size(); i > 0; --i)  // reverse range only in c++20
+        cout << values[i - 1] % 10;  // last digit
     for (const auto el: values)
-        cout << el / 10;
+        cout << el / 10;  // remainder
     cout << '\n';
     return 0;
 }
+
+/*
+Input:
+input values: 137 42 5809
+
+Output:
+927134580
+*/

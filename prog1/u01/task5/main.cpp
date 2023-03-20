@@ -15,3 +15,11 @@ int main() {
     cout << "\ndegrees F = " << degrees * 1.8 + 32 << '\n';
     return 0;
 }
+
+/*
+Input:
+degrees C = 37
+
+Output:
+degrees F = 98.6
+*/

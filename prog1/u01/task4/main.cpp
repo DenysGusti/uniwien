@@ -19,3 +19,11 @@ int main() {
     cout << "\narea of the circular sector = " << r * r / 2 * a << '\n';
     return 0;
 }
+
+/*
+Input:
+r, a in degrees = 2 90
+
+Output:
+area of the circular sector = 3.14159
+*/

@@ -10,6 +10,7 @@ Write a program that calculates the probability of a jackpot (Lottosechser) usin
 */
 
 void fill_combinations(array<array<uint64_t, 7>,  46> &c) {
+    // working with floating-point arithmetic gives errors, factorials are too big, so I use dynamic programming, filling Pascal's triangle
     for (size_t i = 0; i < c.size(); ++i)
         c[i][0] = 1;
 
@@ -19,8 +20,22 @@ void fill_combinations(array<array<uint64_t, 7>,  46> &c) {
 }
 
 int main() {
-    array<array<uint64_t, 7>,  46> c{};
+    array<array<uint64_t, 7>,  46> c{}; // array of combinations, C[n][k] = n!/(k!*(n-k)!)
     fill_combinations(c);
-    cout << "the probability of a jackpot = " << 100.L / c[6][45] << "%\n";
+
+    // for (size_t i = 0; i < c.size(); ++i) {
+    //     for (size_t j = 0; j < c[0].size(); ++j)
+    //         cout << c[i][j] << '\t';
+    //     cout << '\n';
+    // }
+
+    cout << "the probability of a jackpot = " << 100.L / c[45][6] << "%\n";  // L for long double
     return 0;
 }
+
+/*
+Input:
+
+Output:
+the probability of a jackpot = 1.22774e-05%
+*/
