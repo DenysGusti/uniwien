@@ -9,7 +9,7 @@ using ld = long double;
 */
 
 int64_t rounding(const ld x) {
-    return x + (x - static_cast<int64_t>(x) >= 0.5);
+    return x + 0.5;
 }
 
 int main() {
