@@ -10,7 +10,7 @@ E.g.: Input: 123 Output: 321
 */
 
 int main() {
-    uint64_t n{}, mod{};
+    uint64_t n{};
     cout << "a three-digit number = ";
     cin >> n;
 
