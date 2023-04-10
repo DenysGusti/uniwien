@@ -4,7 +4,7 @@ using namespace std;
 
 using ld = long double;
 
-uint64_t task_sum(const int64_t n) {
+uint64_t task_sum(const uint64_t n) {
     uint64_t ans = 0, add_sum{};
     for (uint64_t i = 1; i <= n; ++i) {
         add_sum = i;
