@@ -6,6 +6,21 @@
         "ostream": "cpp",
         "cmath": "cpp",
         "random": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "unordered_map": "cpp",
+        "xstring": "cpp",
+        "xlocale": "cpp",
+        "complex": "cpp",
+        "xtr1common": "cpp",
+        "atomic": "cpp",
+        "charconv": "cpp",
+        "format": "cpp",
+        "string": "cpp",
+        "iosfwd": "cpp",
+        "ios": "cpp",
+        "ratio": "cpp",
+        "limits": "cpp",
+        "utility": "cpp",
+        "vector": "cpp"
     }
 }
