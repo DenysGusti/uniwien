@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "chrono": "cpp",
+        "filesystem": "cpp",
+        "iosfwd": "cpp",
+        "vector": "cpp",
+        "random": "cpp",
+        "xstring": "cpp",
+        "string": "cpp",
+        "iostream": "cpp",
+        "algorithm": "cpp"
+    }
+}
