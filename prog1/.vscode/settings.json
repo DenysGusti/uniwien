@@ -8,6 +8,14 @@
         "xstring": "cpp",
         "string": "cpp",
         "iostream": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "xiosbase": "cpp",
+        "array": "cpp",
+        "xlocale": "cpp",
+        "initializer_list": "cpp",
+        "list": "cpp",
+        "type_traits": "cpp",
+        "xhash": "cpp",
+        "xutility": "cpp"
     }
 }
