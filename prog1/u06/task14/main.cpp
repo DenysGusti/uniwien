@@ -26,19 +26,21 @@ private:
     vector<string> words;
     string word;
     string guessedLetters;
+    random_device rd;
+    mt19937_64 gen{rd()};
+    uniform_int_distribution<size_t> dist;
 
-    void GetWords(const filesystem::path &path) {
+    static vector<string> getWords(const filesystem::path &path) {
+        vector<string> word_list;
         ifstream fin{path};
-        words.reserve(2'000'000);  // das arbeitet in CLion, aber in VSCode nicht, keine Ahnung warum
+        word_list.reserve(2'000'000);  // das arbeitet in CLion, aber in VSCode nicht, keine Ahnung warum
 
         for (string buf; getline(fin, buf);)
-            words.push_back(buf);
+            word_list.push_back(buf);
+        return word_list;
     }
 
-    string GetRandomWord() {
-        random_device rd;
-        mt19937_64 gen{rd()};
-        uniform_int_distribution<size_t> dist(0, words.size() - 1);
+    string getRandomWord() {
         auto w = words[dist(gen)];
 
         for (auto &c: w)
@@ -47,40 +49,27 @@ private:
         return w;
     }
 
-    void Initialize() {
+    void initialize() {
         guessedLetters.clear();
-        word = GetRandomWord();
-        DrawWord();
+        word = getRandomWord();
+        drawWord();
     }
 
-    void Greet() {
-        for (char o = 'y'; o == 'y' || o == 'Y';) {
-            cout << "Game started!\n";
-            Initialize();
-            cout << (StartGame() ? "You won!\n" : "You lost!\n");
-            cout << "Game ended!\n";
-            cout << "The word was " << word;
-            cout << "\nDo you want to continue? y/n\n";
-            cin >> o;
-        }
-    }
-
-    bool StartGame() {
+    bool startGame() {
         for (uint16_t tries = 3; tries > 0;) {
-            auto c = GetLetter();
+            auto c = getLetter();
             if (word.find(c) != string::npos) {
                 guessedLetters += c;
-                DrawWord();
-                if (WordIsGuessed())
+                drawWord();
+                if (wordIsGuessed())
                     return true;
-            }
-            else
+            } else
                 cout << "Wrong letter! " << --tries << " tries are left!\n";
         }
         return false;
     }
 
-    static char GetLetter() {
+    static char getLetter() {
         char c{};
         while (!isalpha(c)) {
             cout << "Choose a letter: ";
@@ -90,26 +79,37 @@ private:
         return c;
     }
 
-    void DrawWord() {
+    void drawWord() {
         for (const auto letter: word)
             cout << (guessedLetters.find(letter) != string::npos ? letter : '_');
         cout << endl;
     }
 
-    bool WordIsGuessed() {
+    bool wordIsGuessed() {
         return all_of(word.begin(), word.end(),
                       [&](const char letter) -> bool { return guessedLetters.find(letter) != string::npos; });
     }
 
 public:
-    explicit Hangman(string_view path) {
-        GetWords(path);
-        Greet();
+    explicit Hangman(string_view path) :
+            words{getWords(path)}, dist{uniform_int_distribution<size_t>{0, words.size() - 1}} {}
+
+    void play() {
+        cout << "Game started!\n";
+        initialize();
+        cout << (startGame() ? "You won!\n" : "You lost!\n");
+        cout << "Game ended!\nThe word was " << word << endl;
     }
 };
 
 int main() {
-    Hangman hangman{"wordlist-german.txt"};  // https://gist.github.com/MarvinJWendt/2f4f4154b8ae218600eb091a5706b5f4#file-wordlist-german-txt
+    Hangman hangman{"wordlist-german.txt"};
+    // https://gist.github.com/MarvinJWendt/2f4f4154b8ae218600eb091a5706b5f4#file-wordlist-german-txt
+    for (char again = 'y'; again == 'y' || again == 'Y';) {
+        hangman.play();
+        cout << "Do you want to play again? y/n\n";
+        cin >> again;
+    }
     return 0;
 }
 
