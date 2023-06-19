@@ -12,6 +12,7 @@ public:
     bool mine = false;
     bool opened = false;
     bool marked = false;
+    bool chosen_mine = false;
     size_t mines_nearby = 0;
 
     friend ostream &operator<<(ostream &os, const Cell &cell) {
@@ -27,9 +28,12 @@ public:
                 else
                     os << 'X';
             } else {
-                if (cell.mine)
-                    os << '*';
-                else {
+                if (cell.mine) {
+                    if (cell.chosen_mine)
+                        os << '@';
+                    else
+                        os << '*';
+                } else {
                     if (cell.mines_nearby == 0)
                         os << '-';
                     else
@@ -195,35 +199,6 @@ private:
         return true;
     }
 
-    void openSafeNearby(const size_t row, const size_t column) {
-        if (row > 0) {
-            if (!field[row - 1][column].mine)
-                field[row - 1][column].opened = true;
-            if (column > 0)
-                if (!field[row - 1][column - 1].mine)
-                    field[row - 1][column - 1].opened = true;
-            if (column < columns - 1)
-                if (!field[row - 1][column + 1].mine)
-                    field[row - 1][column + 1].opened = true;
-        }
-        if (row < rows - 1) {
-            if (!field[row + 1][column].mine)
-                field[row + 1][column].opened = true;
-            if (column > 0)
-                if (!field[row + 1][column - 1].mine)
-                    field[row + 1][column - 1].opened = true;
-            if (column < columns - 1)
-                if (!field[row + 1][column + 1].mine)
-                    field[row + 1][column + 1].opened = true;
-        }
-        if (column > 0)
-            if (!field[row][column - 1].mine)
-                field[row][column - 1].opened = true;
-        if (column < columns - 1)
-            if (!field[row][column + 1].mine)
-                field[row][column + 1].opened = true;
-    }
-
     void recursiveOpening(const size_t row, const size_t column, bool first_opening = false) {
         field[row][column].opened = true;
         if (field[row][column].mines_nearby > 0 && !first_opening)
@@ -282,6 +257,7 @@ private:
                 } else {
                     if (field[row_idx][column_idx].mine) {
                         field[row_idx][column_idx].opened = true;
+                        field[row_idx][column_idx].chosen_mine = true;
                         openAllMinesAndMarks();
                         drawField();
                         return false;
